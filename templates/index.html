@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Real Estate Price Prediction</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animate/animate.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/css-hamburgers/hamburgers.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/animsition/css/animsition.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/select2/select2.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/daterangepicker/daterangepicker.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/util.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="{{ url_for('static', filename='js/read.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/train.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/animsition/js/animsition.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/bootstrap/js/popper.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/select2/select2.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/daterangepicker/moment.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/daterangepicker/daterangepicker.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/countdowntime/countdowntime.js') }}"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+	<script src="{{ url_for('static', filename='js/map-custom.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+	<div class="container-contact100">
+		<div class="contact100-map" id="google_map" data-map-x="19" data-map-y="73" data-pin="static/images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div>
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form" method="GET" action="/" id="customer_form">
+				<span class="contact100-form-title">
+					Evaluate your Property
+				</span>
+				{% if val > 0.0 %}
+				<div>
+					<p>Estimated price: &#8377; {{ val }} lakhs</p>
+				</div>
+				<br>
+				{% endif %}
+				<div class="container-contact100-form-btn">
+					<button id="train" type="button" class="contact100-form-btn" onclick="alert('Model successfully trained.')">Train Model</button>
+				</div>
+				<br>
+				<div class="wrap-input100 validate-input" data-validate="Location is required">
+					<input class="input100" type="text" list="Places" name="Location" placeholder="Location">
+					<datalist id="Places">
+						<option value="Andheri East">
+						<option value="Andheri West">
+						<option value="Bandra East">
+						<option value="Bandra West">
+						<option value="Borivali East">
+						<option value="Borivali West">
+						<option value="Byculla East">
+						<option value="Byculla West">
+						<option value="Charni Road">
+						<option value="Churchgate">
+						<option value="Dadar East">
+						<option value="Dadar West">
+						<option value="Dahisar East">
+						<option value="Dahisar West">
+						<option value="Ghatkopar East">
+						<option value="Ghatkopar West">
+						<option value="Goregaon East">
+						<option value="Goregaon West">
+						<option value="Grant Road East">
+						<option value="Grant Road West">
+						<option value="Jogeshwari East">
+						<option value="Jogeshwari West">
+						<option value="Kandivali East">
+						<option value="Kandivali West">
+						<option value="Kanjurmarg East">
+						<option value="Kanjurmarg West">
+						<option value="Khar East">
+						<option value="Khar West">
+						<option value="Kurla East">
+						<option value="Kurla West">
+						<option value="Lower Parel East">
+						<option value="Mahalaxmi">
+						<option value="Mahim East">
+						<option value="Mahim West">
+						<option value="Malad East">
+						<option value="Malad West">
+						<option value="Matunga East">
+						<option value="Matunga West">
+						<option value="Mulund East">
+						<option value="Mulund West">
+						<option value="Prabhadevi">
+						<option value="Santacruz East">
+						<option value="Santacruz West">
+						<option value="Vikhroli East">
+						<option value="Vikhroli West">
+						<option value="Vile Parle East">
+						<option value="Vile Parle West">
+					</datalist>
+					<span class="focus-input100-1"></span>
+					<span class="focus-input100-2"></span>
+				</div>
+				<div class="wrap-input100 validate-input" data-validate="Carpet Area is required">
+					<input class="input100" type="number" name="Carpet_Area" placeholder="Carpet Area">
+					<span class="focus-input100-1"></span>
+					<span class="focus-input100-2"></span>
+				</div>
+				<div class="wrap-input100 validate-input" data-validate="Bedrooms is required">
+					<input class="input100" type="number" name="Bedrooms" placeholder="Bedrooms">
+					<span class="focus-input100-1"></span>
+					<span class="focus-input100-2"></span>
+				</div>
+				<div class="wrap-input100 validate-input" data-validate="Bathrooms is required">
+					<input class="input100" type="number" name="Bathrooms" placeholder="Bathrooms">
+					<span class="focus-input100-1"></span>
+					<span class="focus-input100-2"></span>
+				</div>
+				<div class="contact100-form-checkbox">
+					<p>Furnishing</p>
+					<br>
+					<input class="input-checkbox100" id="f1" type="radio" name="Furnishing" value="0">
+					<label class="label-checkbox100" for="f1">
+						Furnished
+					</label>
+					<input class="input-checkbox100" id="f2" type="radio" name="Furnishing" value="1">
+					<label class="label-checkbox100" for="f2">
+						Semi-furnished
+					</label>
+					<input class="input-checkbox100" id="f3" type="radio" name="Furnishing" value="2">
+					<label class="label-checkbox100" for="f3">
+						Unfurnished
+					</label>
+				</div>
+				<div class="wrap-input100 validate-input" data-validate="Floor Number is required">
+					<input class="input100" type="number" name="Floor_Number" placeholder="Floor Number">
+					<span class="focus-input100-1"></span>
+					<span class="focus-input100-2"></span>
+				</div>
+				<div class="wrap-input100 validate-input" data-validate="Parking is required">
+					<input class="input100" type="number" name="Parking" placeholder="Parking" id="parking">
+					<span class="focus-input100-1"></span>
+					<span class="focus-input100-2"></span>
+				</div>
+				<div class="container-contact100-form-btn">
+					<input type="submit" value="Show Price" class="contact100-form-btn">
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

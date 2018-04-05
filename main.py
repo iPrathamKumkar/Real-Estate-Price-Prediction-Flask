@@ -30,13 +30,17 @@ def main():
                 return 'Success'
             except Exception as e:
                 return jsonify({'error': str(e), 'trace': traceback.format_exc()})
-    predicted_price = predicted_value
-    predicted_price1 = 0.9*predicted_price/100
-    predicted_price2 = 1.1*predicted_price/100
-    predicted_price1 = round(predicted_price1, 2)
-    predicted_price2 = round(predicted_price2, 2)
-    predicted_value = 0.0
-    return render_template('index.html', val1 = predicted_price1, val2 = predicted_price2)
+    if predicted_value == -1:
+        predicted_value = 0.0
+        return render_template('index.html', val = -1, val1 = 0, val2 = 0)
+    else:
+        predicted_price = predicted_value
+        predicted_price1 = 0.9*predicted_price/100
+        predicted_price2 = 1.1*predicted_price/100
+        predicted_price1 = round(predicted_price1, 2)
+        predicted_price2 = round(predicted_price2, 2)
+        predicted_value = 0.0
+        return render_template('index.html', val = 0, val1 = predicted_price1, val2 = predicted_price2)
 # Train the model
 @app.route('/train', methods=['GET'])
 def train():
@@ -65,4 +69,6 @@ def train():
     clf = rf()
     clf.fit(x, y)
     joblib.dump(clf, model_file_name)
-    return redirect(url_for('main'))
+    global predicted_value
+    predicted_value = -1
+    return render_template('index.html', val = -1, val1 = 0, val2 = 0)

@@ -37,6 +37,9 @@
 				<span class="contact100-form-title">
 					Evaluate your Property
 				</span>
+				<div id="model" style="display:none" >
+					<p>Model successfully trained</p>
+				</div>
 				{% if val1 > 0.0 %}
 				<div>
 					<p>Estimated price: &#8377; {{ val1 }} Cr - &#8377; {{ val2 }} Cr</p>
@@ -44,7 +47,7 @@
 				<br>
 				{% endif %}
 				<div class="container-contact100-form-btn">
-					<button id="train" type="button" class="contact100-form-btn" onclick="alert('Model successfully trained.')">Train Model</button>
+					<button id="train" type="button" class="contact100-form-btn">Train Model</button>
 				</div>
 				<br>
 				<div class="wrap-input100 validate-input" data-validate="Location is required">

@@ -1,24 +1,21 @@
-import sys
-import os
-import shutil
-import time
 import traceback
-from flask import Flask, request, jsonify, render_template, redirect, url_for, abort
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 import pandas as pd
 from sklearn.externals import joblib
 global predicted_value
 predicted_value = 0.0
 app = Flask(__name__)
 # Inputs
-training_data = 'data/99acres.csv'
+training_data = '/home/RealEstatePrice/price/data/99acres.csv'
 include = ['Carpet_Area', 'Floor_Number', 'Parking', 'Furnishing', 'Location', 'Bathrooms', 'Bedrooms','Price']
 dependent_variable = include[-1]
-model_directory = 'model'
+model_directory = '/home/RealEstatePrice/price/model'
 model_file_name = '%s/model.pkl' % model_directory
 model_columns_file_name = '%s/model_columns.pkl' % model_directory
 # These will be populated at training time
 model_columns = None
 clf = None
+# Home page
 @app.route('/', methods=['GET','POST'])
 def main():
     if request.method == 'POST':
@@ -30,13 +27,13 @@ def main():
                 prediction = list(clf.predict(query))
                 global predicted_value
                 predicted_value = prediction[0]
-                print("Predicted value: "+ str(predicted_value))
                 return 'Success'
-            except Exception, e:
+            except Exception as e:
                 return jsonify({'error': str(e), 'trace': traceback.format_exc()})
     predicted_price = predicted_value
     predicted_value = 0.0
     return render_template('index.html', val = predicted_price)
+# Train the model
 @app.route('/train', methods=['GET'])
 def train():
     # Training the data using Random Forest algorithm
@@ -61,25 +58,6 @@ def train():
     joblib.dump(model_columns, model_columns_file_name)
     global clf
     clf = rf()
-    start = time.time()
     clf.fit(x, y)
-    print 'Trained in %.1f seconds' % (time.time() - start)
-    print 'Model training score: %s' % clf.score(x, y)
     joblib.dump(clf, model_file_name)
     return redirect(url_for('main'))
-if __name__ == '__main__':
-    try:
-        port = int(sys.argv[1])
-    except Exception, e:
-        port = 5000
-    try:
-        clf = joblib.load(model_file_name)
-        print 'Model loaded'
-        model_columns = joblib.load(model_columns_file_name)
-        print 'Model columns loaded'
-    except Exception, e:
-        print 'No model here'
-        print 'Train first'
-        print str(e)
-        clf = None
-    app.run(port=port, debug=True)

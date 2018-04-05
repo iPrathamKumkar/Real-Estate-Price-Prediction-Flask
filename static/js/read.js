@@ -30,7 +30,7 @@ $(document).ready(function() {
         console.log(param1);
         $.ajax({
             type: 'POST',
-            url: '/',
+            url: 'http://realestateprice.pythonanywhere.com/',
             dataType: 'json',
             data: param1,
             contentType : 'application/json'

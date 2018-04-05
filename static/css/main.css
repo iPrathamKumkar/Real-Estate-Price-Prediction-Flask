@@ -7,20 +7,20 @@
 
 @font-face {
   font-family: JosefinSans-Bold;
-  src: url('../fonts/JosefinSans/JosefinSans-Bold.ttf'); 
+  src: url('../fonts/JosefinSans/JosefinSans-Bold.ttf');
 }
 
 @font-face {
   font-family: Oswald-Medium;
-  src: url('../fonts/oswald/Oswald-Medium.ttf'); 
+  src: url('../fonts/oswald/Oswald-Medium.ttf');
 }
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
 * {
-  margin: 0px; 
-  padding: 0px; 
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
 }
 
@@ -117,7 +117,7 @@ iframe {
 [ Contact ]*/
 
 .container-contact100 {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -211,7 +211,7 @@ textarea.input100 {
 /*------------------------------------------------------------------
 [ Focus Input ]*/
 
-.focus-input100-1, 
+.focus-input100-1,
 .focus-input100-2 {
   display: block;
   position: absolute;

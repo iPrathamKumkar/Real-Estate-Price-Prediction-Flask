@@ -1,8 +1,9 @@
 $(document).ready(function() {
     $('#train').click(function() {
+        var temp = "Done"
     	$.ajax({
             type: 'GET',
-            url: '/train',
+            url: 'http://realestateprice.pythonanywhere.com/train',
         });
     });
 });

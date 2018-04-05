@@ -31,8 +31,8 @@ def main():
             except Exception as e:
                 return jsonify({'error': str(e), 'trace': traceback.format_exc()})
     predicted_price = predicted_value
-    predicted_price1 = 0.93*predicted_price/100
-    predicted_price2 = 1.07*predicted_price/100
+    predicted_price1 = 0.9*predicted_price/100
+    predicted_price2 = 1.1*predicted_price/100
     predicted_price1 = round(predicted_price1, 2)
     predicted_price2 = round(predicted_price2, 2)
     predicted_value = 0.0
@@ -44,6 +44,7 @@ def train():
     from sklearn.ensemble import RandomForestRegressor as rf
     df = pd.read_csv(training_data)
     df_ = df[include]
+    df_ = df_.dropna()
     # One-hot encoding categorical variables
     categoricals = []
     for col, col_type in df_.dtypes.iteritems():

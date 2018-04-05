@@ -31,8 +31,12 @@ def main():
             except Exception as e:
                 return jsonify({'error': str(e), 'trace': traceback.format_exc()})
     predicted_price = predicted_value
+    predicted_price1 = 0.93*predicted_price/100
+    predicted_price2 = 1.07*predicted_price/100
+    predicted_price1 = round(predicted_price1, 2)
+    predicted_price2 = round(predicted_price2, 2)
     predicted_value = 0.0
-    return render_template('index.html', val = predicted_price)
+    return render_template('index.html', val1 = predicted_price1, val2 = predicted_price2)
 # Train the model
 @app.route('/train', methods=['GET'])
 def train():

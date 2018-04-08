@@ -71,4 +71,4 @@ def train():
     joblib.dump(clf, model_file_name)
     global predicted_value
     predicted_value = -1
-    return render_template('index.html', val = -1, val1 = 0, val2 = 0)
+    return redirect(url_for('main'))

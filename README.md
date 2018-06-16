@@ -16,7 +16,7 @@ Install the pre-requisite libraries:
 pip install requirements.txt
 ```
 
-Edit the adresses on lines 9 and 12 in the main.py file to match the path in your system
+Edit the adresses on lines 9 and 12 in the main.py file to match the path in your system:
 
 ```
 training_data = '.../data/99acres.csv'

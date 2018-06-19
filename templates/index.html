@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>House Price Estimation</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico') }}"/>
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icons/favicon.ico') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}">
@@ -29,6 +30,7 @@
 	<script src="{{ url_for('static', filename='js/map-custom.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
+
 <body>
 	<div class="container-contact100">
 		<div class="contact100-map" id="google_map" data-map-x="19" data-map-y="73" data-scrollwhell="0" data-draggable="0"></div>
@@ -37,15 +39,14 @@
 				<span class="contact100-form-title">
 					Evaluate your Property
 				</span>
-				<div id="model" style="display:none" >
+				<div id="model" style="display:none">
 					<p>Model successfully trained</p>
 				</div>
 				{% if val1 > 0.0 %}
 				<div>
 					<p>Estimated price: &#8377; {{ val1 }} Cr - &#8377; {{ val2 }} Cr</p>
 				</div>
-				<br>
-				{% endif %}
+				<br> {% endif %}
 				<div class="container-contact100-form-btn">
 					<button id="train" type="button" class="contact100-form-btn">Train Model</button>
 				</div>
@@ -152,4 +153,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

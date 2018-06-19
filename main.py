@@ -5,6 +5,8 @@ from sklearn.externals import joblib
 global predicted_value
 predicted_value = 0.0
 app = Flask(__name__)
+
+
 # Inputs
 training_data = '/home/RealEstatePrice/price/data/99acres.csv'
 include = ['Carpet_Area', 'Floor_Number', 'Parking', 'Furnishing', 'Location', 'Bathrooms', 'Bedrooms','Price']
@@ -15,8 +17,10 @@ model_columns_file_name = '%s/model_columns.pkl' % model_directory
 # These will be populated at training time
 model_columns = None
 clf = None
+
+
 # Home page
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def main():
     if request.method == 'POST':
         if clf:
@@ -32,7 +36,7 @@ def main():
                 return jsonify({'error': str(e), 'trace': traceback.format_exc()})
     if predicted_value == -1:
         predicted_value = 0.0
-        return render_template('index.html', val = -1, val1 = 0, val2 = 0)
+        return render_template('index.html', val=-1, val1=0, val2=0)
     else:
         predicted_price = predicted_value
         predicted_price1 = 0.9*predicted_price/100
@@ -40,7 +44,9 @@ def main():
         predicted_price1 = round(predicted_price1, 2)
         predicted_price2 = round(predicted_price2, 2)
         predicted_value = 0.0
-        return render_template('index.html', val = 0, val1 = predicted_price1, val2 = predicted_price2)
+        return render_template('index.html', val=0, val1=predicted_price1, val2=predicted_price2)
+
+
 # Train the model
 @app.route('/train', methods=['GET'])
 def train():

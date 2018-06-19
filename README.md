@@ -32,5 +32,5 @@ For more information, visit https://help.pythonanywhere.com/pages/Flask/
 
 ## Authors
 
-* **Prathamesh Kumkar** - (https://github.com/iPrathamKumkar)
-* **Ishan Madan** - (https://github.com/ishanmadan1996)
+* **Prathamesh Kumkar** - [iPrathamKumkar](https://github.com/iPrathamKumkar)
+* **Ishan Madan** - [ishanmadan1996](https://github.com/ishanmadan1996)
